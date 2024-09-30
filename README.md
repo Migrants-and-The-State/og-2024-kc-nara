@@ -1,12 +1,17 @@
-# aperitiiif-batch-template
-[![lint batch](https://github.com/middlicomp/aperitiiif-batch-template/actions/workflows/lint-batch.yml/badge.svg)](https://github.com/middlicomp/aperitiiif-batch-template/actions/workflows/lint-batch.yml) [![publish batch](https://github.com/middlicomp/aperitiiif-batch-template/actions/workflows/publish-batch.yml/badge.svg)](https://github.com/middlicomp/aperitiiif-batch-template/actions/workflows/publish-batch.yml)
-![repo size](https://img.shields.io/github/repo-size/middlicomp/aperitiiif-batch-template)
-[![template version](https://img.shields.io/badge/template%20version-v0.1.0-9cf)](.template-version)
+# og-2024-kc-nara
 
-Small(ish) batch IIIF processing for digital research and scholarship. 🥂
+aperitiiif batch of nara a files for migrants and the state neh grant project 🥂
 
-This is a template repo including github actions workflows, gem configs, and scaffolding for creating an aperitiiif batch.
+## description
 
-### Related repos:
-- **[aperitiiif-cli](https://github.com/middlicomp/aperitiiif-cli)** : ruby gem for processing batches
-- **[aperitiiif](https://github.com/middlicomp/aperitiiif)** : documentation for the project; publishes to [github pages](https://middlicomp.github.io/aperitiiif)
+this is a modified aperitiiif batch repo. because of the size, images are not stored cannonically in the repo and processed by the github `publish-batch` action. 
+
+instead, cannonical pdfs and images are stored in an NYU Research Workspace (RW) volume. the scripts in `lib` process the files from the volume mounted locally and sync the generated image and json resources for the IIIF APIs directly to AWS S3 using credentials stored (and gitignored) in `.env`.
+
+the github action is used to deploy the results to github pages only.
+
+## owner(s)
+- [@mnyrop](https://github.com/mnyrop)
+
+## usage
+- Run csv initialization & pdf splitting script with `bundle exec ruby lib/split-pdfs-populate-csv.rb`

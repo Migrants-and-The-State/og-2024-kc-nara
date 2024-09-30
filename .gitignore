@@ -1,5 +1,6 @@
+aperitiiif-cli
+.env
 .DS_Store
+.github
 tmp
 build
-aperitiiif
-aperitiiif-cli
