@@ -1,7 +1,6 @@
 aperitiiif-cli
 .env
 .DS_Store
-.github
 tmp
 build/image
 build/presentation
