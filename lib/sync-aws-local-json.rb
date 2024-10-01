@@ -3,8 +3,9 @@ require 'dotenv'
 
 Dotenv.load
 
-s3        = Aws::S3::Client.new
-json_docs = Dir.glob("./build/presentation/**/*.json")
+credentials = Aws::Credentials.new ENV['ACCESS_KEY_ID'], ENV['SECRET_ACCESS_KEY']
+s3          = Aws::S3::Client.new(region: ENV['REGION'], credentials: credentials)
+json_docs   = Dir.glob("./build/presentation/**/*.json")
 
 json_docs.each do |file|
   key = file.sub './build/presentation/', ''

@@ -3,8 +3,9 @@ require 'dotenv'
 
 Dotenv.load
 
-s3      = Aws::S3::Client.new
-images  = Dir.glob("./build/image/*.tif")
+credentials = Aws::Credentials.new ENV['ACCESS_KEY_ID'], ENV['SECRET_ACCESS_KEY']
+s3          = Aws::S3::Client.new(region: ENV['REGION'], credentials: credentials)
+images      = Dir.glob("./build/image/*.tif")
 
 images.each do |file|
   key = File.basename(file)

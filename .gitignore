@@ -3,4 +3,6 @@ aperitiiif-cli
 .DS_Store
 .github
 tmp
-build
+build/image
+build/presentation
+notes*
