@@ -2,13 +2,14 @@ require 'fileutils'
 require 'pdf-reader'
 require 'vips'
 
-pdf_dir     = '/Volumes/migrants_state/2024-KC-NARA/pdfs'
-data_dir    = '/Volumes/migrants_state/2024-KC-NARA/jpgs'
+pdf_dir     = '/Volumes/migrants_state/OG-2024-KC-NARA/pdfs'
+data_dir    = '/Volumes/migrants_state/OG-2024-KC-NARA/jpgs'
 pdfs        = Dir.glob("#{pdf_dir}/*.pdf")
 pdfs_count  = pdfs.length
 
 afiles_csv  = './src/afiles.csv'
 pages_csv   = './src/pages.csv'
+
 
 # write start of csvs
 File.open(afiles_csv, 'w') do |file| 
@@ -29,21 +30,22 @@ pdfs.each_with_index do |path, i|
   page_count  = reader.page_count
   og_pdf_id   = File.basename(path, '.pdf')
   a_number    = og_pdf_id.sub('_redacted', '').sub('_withdrawal', '')
+  target_dir  = "#{data_dir}/#{a_number}"
   afile_data  = [a_number,a_number,og_pdf_id,page_count]
 
   File.open(afiles_csv, 'a') { |file| file.puts afile_data.join(',') } 
-  FileUtils.mkdir_p "#{data_dir}/#{a_number}"
+  FileUtils.mkdir_p(target_dir)
 
   (0..page_count - 1).each do |index|
     page_number     = index.to_s.rjust(4, "0")
     doc_id          = "#{a_number}_#{page_number}"
-    target          = "#{data_dir}/#{a_number}/#{page_number}.jpg"
+    target          = "#{target_dir}/#{page_number}.jpg"
     extracted_text  = reader.pages[index].text.to_s.gsub(/\R+/, "|").gsub('"', "'")
     doc_data        = [doc_id,doc_id,a_number,page_number,"\"#{extracted_text}\""]
 
     File.open(pages_csv, "a") { |file| file.puts doc_data.join(',') }
     
-    return if File.exist? target
+    # return if File.exist? target
 
     img     = Vips::Image.pdfload path, page: index, n: 1, dpi: 300
     img.jpegsave target
