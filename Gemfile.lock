@@ -1,5 +1,7 @@
-PATH
-  remote: aperitiiif-cli
+GIT
+  remote: https://github.com/migrants-and-the-state/aperitiiif-cli.git
+  revision: 6288820d0986f090004456546a7573dacc5fc756
+  branch: main
   specs:
     aperitiiif (0.1.2)
       colorize
@@ -31,7 +33,7 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     afm (0.2.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.986.0)
+    aws-partitions (1.987.0)
     aws-sdk-core (3.209.1)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.651.0)
@@ -144,6 +146,7 @@ DEPENDENCIES
   aws-sdk-s3 (~> 1)
   dotenv
   pdf-reader
+  rake
 
 BUNDLED WITH
    2.5.16
